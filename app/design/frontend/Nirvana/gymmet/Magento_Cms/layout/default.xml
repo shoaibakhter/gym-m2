@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="footer">
+            <container name="cms_footer_links_container" label="CMS Footer Links" htmlTag="div" htmlClass="links" before="footer_links" />
+        </referenceContainer>
+        <referenceBlock name="footer_links">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="privacy-policy-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Privacy and Cookie Policy</argument>
+                    <argument name="path" xsi:type="string">privacy-policy-cookie-restriction-mode</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+
+        <!--<referenceContainer name="main.content" htmlClass=""/>
+    <referenceContainer name='content'>
+        <container name='content-inner' as='content-inner' htmlTag='section' htmlClass='content-sec'>
+            <container name='content-container' as='content-container' htmlTag='div' htmlClass='container'/>
+        </container>
+    </referenceContainer>
+    <move element='cms_page' destination='content-container'/>
+    <move element="page.main.title" destination="content" before="content-inner" />-->
+    <referenceBlock name="breadcrumbs" remove="true" />
+    <referenceContainer name="page.wrapper" htmlClass="wrapper" />
+    </body>
+</page>

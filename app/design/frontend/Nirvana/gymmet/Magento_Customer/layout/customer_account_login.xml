@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        
+
+
+        <referenceContainer name="main">
+            <container name="dash-main" htmlTag="section" htmlClass="content-sec Margin-top">
+                <container name="dash-container" htmlTag="div" htmlClass="container">
+                    <container name="login_container" htmlTag="div" htmlClass="account-login" />
+                </container>
+            </container>
+        </referenceContainer>
+        <move element="content" destination="login_container" />
+        <move element="page.messages" destination="login_container" before="-" />
+        <referenceContainer name="page.main.title" remove="true" />
+        <referenceContainer name="customer.login.container" htmlTag="div" htmlClass="guesst-form" />
+
+        
+
+    </body>
+</page>

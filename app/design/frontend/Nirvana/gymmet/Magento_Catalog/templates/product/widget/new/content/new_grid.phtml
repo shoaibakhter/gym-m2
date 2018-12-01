@@ -1,0 +1,87 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Template for displaying new products widget
+ *
+ * @var $block \Magento\Catalog\Block\Product\Widget\NewWidget
+ */
+if ($exist = ($block->getProductCollection() && $block->getProductCollection()->getSize())) {
+    $type = 'widget-new-grid';
+
+    $mode = 'grid';
+
+    $image = 'new_products_content_widget_grid';
+    $title = __('New Products');
+    $items = $block->getProductCollection()->getItems();
+
+    $showWishlist = true;
+    $showCompare = true;
+    $showCart = true;
+    $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::DEFAULT_VIEW;
+    $description = false;
+}
+?>
+
+<?php if ($exist):?>
+    <div class="block widget block-new-products <?= /* @escapeNotVerified */ $mode ?>">
+
+        
+            <?= /* @escapeNotVerified */ '<!-- ' . $image . '-->' ?>
+            <div class="products-<?= /* @escapeNotVerified */ $mode ?> <?= /* @escapeNotVerified */ $mode ?>">
+                <div class="product-items <?= /* @escapeNotVerified */ $type ?>">
+                    <?php $iterator = 1; ?>
+                    <?php foreach ($items as $_item): ?>
+                        <?= /* @escapeNotVerified */ ($iterator++ == 1) ? '<div class="product-box">' : '</div><div class="product-box">' ?>
+                        <div class="photo">                   
+                            <div class="resposive-photo">                    
+                                <div class="img-container">                      
+                                                               
+                                    <a href="<?= /* @escapeNotVerified */ $block->getProductUrl($_item) ?>">
+                                        <?= $block->getImage($_item, $image)->toHtml() ?>
+                                    </a>                        
+                                </div>                    
+                            </div>                    
+                        </div>
+
+                        <div class="photo hover-photo">                 
+                            <div class="resposive-photo">                    
+                                <div class="img-container">                      
+                                                       
+                                    <a href="<?= /* @escapeNotVerified */ $block->getProductUrl($_item) ?>">
+                                        <?= $block->getImage($_item, $image)->toHtml() ?>
+                                    </a>
+                                </div>                  
+                            </div>                 
+                        </div>
+
+                        <div class="descp">               
+                            <h3> <?= $block->escapeHtml($_item->getName()) ?></h3>                 
+                            <a href="<?= /* @escapeNotVerified */ $block->getProductUrl($_item) ?>">
+                                <div class="price-box">
+                                    <?php
+                                    echo $block->getProductPriceHtml($_item, $type);
+                                    ?>
+                                </div>
+                            </a>
+                            <a href="<?= /* @escapeNotVerified */ $block->getProductUrl($_item) ?>">Shop This</a>                               
+                        </div>
+
+
+
+                        
+                        <?= ($iterator == count($items)+1) ? '</div>' : '' ?>
+                    <?php endforeach ?>
+                </div>
+            </div>
+            <?= $block->getPagerHtml() ?>
+       
+    </div>
+<?php endif;?>

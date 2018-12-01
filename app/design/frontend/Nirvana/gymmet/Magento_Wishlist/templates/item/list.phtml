@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/** @var \Magento\Wishlist\Block\Customer\Wishlist\Items $block */
+$columns = $block->getColumns();
+?>
+
+
+    <?php $iterator = 1; ?>
+    <?php if (count($block->getItems())): ?>
+    
+        <?php foreach ($block->getItems() as $item): ?>
+        <?= /* @noEscape */ ($iterator++ == 1) ? '<div data-row="product-item" class="product-box" id="item_' . $block->escapeHtmlAttr($item->getId()) . '">' : '</div><div class="product-box" id="item_' . $block->escapeHtmlAttr($item->getId()) . '">' ?>
+            
+                <?php foreach ($columns as $column): ?>
+                    <?php $column->setItem($item); echo $column->toHtml($item);?>
+                <?php endforeach; ?>
+            
+        <?= ($iterator == count($block->getItems())+1) ? '</div>' : '' ?>
+        <?php endforeach; ?>
+   
+    <?php else: ?>
+        <div class="message info empty">
+            <span><?= $block->escapeHtml(__('This Wish List has no Items')) ?></span>
+        </div>
+    <?php endif; ?>
+
+
+<?php foreach ($columns as $column): ?>
+    <?= $column->getAdditionalHtml() ?>
+<?php endforeach; ?>

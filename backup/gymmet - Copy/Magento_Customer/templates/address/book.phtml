@@ -1,0 +1,112 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Address\Book $block */
+?>
+<div class="col1-set addresses-list">
+    
+    
+        <?php if ($_pAddsses = $block->getDefaultBilling()): ?>
+            <ol>
+                <li class="item">
+               
+                <h3><?= $block->escapeHtml(__('Default Billing Address')) ?></h3>
+                
+                
+                <address>
+                    <?= $block->getAddressHtml($block->getAddressById($_pAddsses)) ?>
+                </address>
+                
+                <p>
+                    <a class="action edit" href="<?= $block->escapeUrl($block->getAddressEditUrl($_pAddsses)) ?>">
+                        <span><?= $block->escapeHtml(__('Edit')) ?></span>
+                    </a>
+                </p>
+                </li>
+            </ol>
+        <?php else: ?>
+            <ol>
+                <li class="item">
+                <h3><?= $block->escapeHtml(__('Default Billing Address')) ?></h3>
+                
+                <p><?= $block->escapeHtml(__('You have no default billing address in your address book.')) ?></p>
+                
+                </li>
+            </ol>
+        <?php endif ?>
+
+        <?php if ($_pAddsses = $block->getDefaultShipping()): ?>
+            <ol>
+                <li class="item">
+                <h3><?= $block->escapeHtml(__('Default Shipping Address')) ?></h3>
+                
+                <address>
+                    <?= $block->getAddressHtml($block->getAddressById($_pAddsses)) ?>
+                </address>
+                
+                <p>
+                    <a class="action edit" href="<?= $block->escapeUrl($block->getAddressEditUrl($_pAddsses)) ?>">
+                        <span><?= $block->escapeHtml(__('Edit')) ?></span>
+                    </a>
+                </p>
+                </li>
+            </ol>
+        <?php else: ?>
+            <ol>
+                <li class="item">
+                <h3><?= $block->escapeHtml(__('Default Shipping Address')) ?></h3>
+                
+                <p><?= $block->escapeHtml(__('You have no default shipping address in your address book.')) ?></p>
+                
+                </li>
+            </ol>
+        <?php endif ?>
+    
+</div>
+
+<div class="address-new">
+    <h3><?= $block->escapeHtml(__('Additional Address Entries')) ?></h3>
+    <div class="block-content">
+        <?php if ($_pAddsses = $block->getAdditionalAddresses()): ?>
+            <ol class="items addresses">
+                <?php foreach ($_pAddsses as $_address): ?>
+                    <li class="item">
+                        <address>
+                            <?= $block->getAddressHtml($_address) ?><br />
+                        </address>
+                        <div class="item actions">
+                            <a class="action edit" href="<?= $block->escapeUrl($block->getUrl('customer/address/edit', ['id' => $_address->getId()])) ?>"><span><?= $block->escapeHtml(__('Edit Address')) ?></span></a>
+                            <a class="action delete" href="#" role="delete-address" data-address="<?= $block->escapeHtmlAttr($_address->getId()) ?>"><span><?= $block->escapeHtml(__('Delete Address')) ?></span></a>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            </ol>
+        <?php else: ?>
+            <p><?= $block->escapeHtml(__('You have no other address entries in your address book.')) ?></p>
+        <?php endif ?>
+    </div>
+    <p><button type="button" role="add-address" title="<?= $block->escapeHtmlAttr(__('Add New Address')) ?>" class="action button btn add"><span><?= $block->escapeHtml(__('Add New Address')) ?></span></button></p>
+</div>
+
+<div class="actions-toolbar">
+    <div class="secondary">
+        <a class="action back" href="<?= $block->escapeUrl($block->getBackUrl()) ?>"><span><?= $block->escapeHtml(__('Back')) ?></span></a>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        ".page-main": {
+            "address": {
+                "deleteAddress": "li.item a[role='delete-address']",
+                "deleteUrlPrefix": "<?= $block->escapeJs($block->escapeUrl($block->getDeleteUrl())) ?>id/",
+                "addAddress": "button[role='add-address']",
+                "addAddressLocation": "<?= $block->escapeJs($block->escapeUrl($block->getAddAddressUrl())) ?>"
+            }
+        }
+    }
+</script>

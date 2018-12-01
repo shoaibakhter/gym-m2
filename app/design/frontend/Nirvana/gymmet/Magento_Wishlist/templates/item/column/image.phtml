@@ -1,0 +1,50 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Image $block */
+
+/** @var \Magento\Wishlist\Model\Item $item */
+$item = $block->getItem();
+$product = $item->getProduct();
+?>
+<div class="photo">
+    <div class="resposive-photo">
+       	<div class="img-container">
+        <div class="center-img"></div>
+		<a class="product-item-photo" tabindex="-1" href="<?= $block->escapeUrl($block->getProductUrl($item)) ?>" title="<?= $block->escapeHtmlAttr($product->getName()) ?>">
+    <?= $block->getImage($product, 'wishlist_thumbnail')->toHtml() ?>
+</a>
+		</div>
+	</div>
+</div>
+<div class="photo hover-photo">
+    <div class="resposive-photo">
+        <div class="img-container">
+       	 	<div class="center-img"></div>
+          	<?= $block->getImage($product, 'wishlist_thumbnail')->toHtml() ?>
+    	</div>
+    </div>
+</div>
+
+<div class="Share_popup mfp-hide" id="Share_popup_<?php echo $product->getId(); ?>">  
+   <div class="box">
+	<h3>
+		<span>Share This</span>
+		<?= $product->getName(); ?>
+	</h3>
+		<ul class="share_socail321">
+	<li> <a href="http://www.facebook.com/sharer.php?u=<?= $block->escapeUrl($block->getProductUrl($item)) ?>" target="_blank" title="Share on Facebook"><i class="fa-facebook"></i>Facebook</a> </li>
+		
+
+	<li><a href="javascript:popWin('https://pinterest.com/pin/create/button/?url=&amp;media=&amp;description=', 'pinterest', 'width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');" title="Pin it"><i class="fa-pinterest"></i>Pinterest</a> </li>
+	 
+	 <li><a href="mailto:?Subject=<?= $block->escapeHtmlAttr($product->getName()) ?>&amp;Body=<?= $block->escapeHtmlAttr($product->getName()) ?>, <?= $block->escapeUrl($block->getProductUrl($item)) ?>"><i class="fa-envelope email-en"></i>Email</a> </li>
+	</ul>
+	<p class="share-link"><?= $block->escapeUrl($block->getProductUrl($item)) ?></p>
+   </div>
+</div>

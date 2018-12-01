@@ -1,0 +1,77 @@
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<body>
+	<referenceBlock name="logo">
+        <arguments>
+            <argument name="logo_file" xsi:type="string">images/logo.png</argument>
+        </arguments>
+    </referenceBlock>
+    
+    <referenceContainer name="header.container" htmlClass="top-header" />
+    
+    <remove name="report.bugs"/>
+	<referenceBlock name="header.panel.wrapper" remove="true" />
+
+    <referenceContainer name="header-wrapper" htmlClass="head_box">
+        <container name="gymmet.container" htmlTag="div" htmlClass="container">
+            <container name="gymright.container" htmlTag="div" htmlClass="right_nav">
+                
+                    <block class="Magento\Framework\View\Element\Template" name="top.search" as="topSearch" template="Magento_Search::form.mini.phtml" />
+               
+            </container>
+        </container>
+    </referenceContainer>
+
+    <referenceContainer name="footer-container" htmlClass="">
+        <container name="gymmet.footer" htmlTag="div" htmlClass="container">
+      
+        </container>
+    </referenceContainer>
+
+    <move element="footer" destination="gymmet.footer" after="-" />
+    <referenceContainer name="footer" htmlClass="" />
+    <referenceBlock name="form.subscribe" remove="true" />
+    <referenceBlock name="copyright" remove="true" />
+
+    <move element="logo" destination="gymmet.container" before="top.search" />
+    <move element="catalog.topnav" destination="gymmet.container" after="logo" />
+    <move element="header.links" destination="gymright.container" before="minicart" />
+    <move element="catalog.compare.link" destination="gymright.container" />
+    <move element="minicart" destination="header.links" />
+    <move element="gymright.container" destination="gymmet.container" after="catalog.topnav" />
+    <referenceBlock name="catalog.compare.link" remove="true"/>
+    <referenceBlock name="header.links">
+        <arguments>
+            <argument name="css_class" xsi:type="string">links_right</argument>
+        </arguments>
+    </referenceBlock>
+    <referenceBlock name="register-link" remove="true" />
+    <referenceContainer name="main.content" htmlTag="div" htmlClass="dd"/>
+
+    <referenceBlock name="reviews.tab" remove="true" />
+    <referenceBlock name="product.review.form" remove="true" />
+    <referenceBlock name="product.info.review" remove="true" />
+    <!--<referenceBlock name="header.links">
+        
+        <block class="Magento\Wishlist\Block\Link" name="wish-list-link">
+            <arguments>
+                <argument name="sortOrder" xsi:type="number">90</argument>
+            </arguments>
+        </block>
+        
+    </referenceBlock>
+    
+    <referenceContainer name='category.view.container'>
+        <container name='product-inner' as='product-inner' htmlTag='div' htmlClass='content-sec  hover-showall'>
+            <container name='product-container' as='product-container' htmlTag='div' htmlClass='container'/>
+        </container>
+    </referenceContainer>
+    <move element='category.products.list' destination='product-container' after="page.main.title"/>-->
+
+</body>
+</page>

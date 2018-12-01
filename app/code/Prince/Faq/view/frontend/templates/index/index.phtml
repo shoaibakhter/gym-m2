@@ -1,0 +1,81 @@
+<?php $isEnable = $block->getConfig('faqtab/general/enable') ?>
+<?php $showGroup = $block->getConfig('faqtab/general/showgroup') ?>
+<?php $showGroupTitle = $block->getConfig('faqtab/general/showgrouptitle') ?>
+<?php $faqGroupCollection = $block->getFaqGroupCollection() ?>
+<section class="Inner-Banner Margin-top" style="height: 210px;">
+<div class="Image-fixed"><img src="<?php echo $this->getViewFileUrl('images/Inner-Banner.jpg'); ?>" alt=""> </div>
+ <div class="vertical-box">
+  <div class="vertical-box-in">
+   <div class="vertical-box-content">
+    <div class="container">
+     <div class="black-box">
+      <h3>May we help you?</h3>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+<section class="Banner-logo"><img src="<?php echo $this->getViewFileUrl('images/Banner-logo.png'); ?>" alt="" class="common-logo"> </section>
+<section class="content-sec margin-top">
+    <div class="container"> 
+<?php if ($faqGroupCollection->getSize()) : ?>
+    <?php if ($isEnable) : ?>
+    <div class="faq-wrapper">
+        <?php if ($showGroup) : ?>
+            <div class="faq-nav-wrapper">
+                <ul class="tabs">
+                <?php foreach ($faqGroupCollection as $group) : 
+                    $group_name = $group->getGroupName();
+                    $arr = @explode(" ",$group_name);
+                ?>
+                    
+                        <li>
+                       
+                            <a id="faq_<?php echo strtolower($arr[0]); ?>" href="#<?php /* @noEscape */ echo strtolower($arr[0]); ?>" class="group-link">
+                                <?php /* @noEscape */ echo $group->getGroupName(); ?>
+                            </a>
+                        </li>
+                    
+                <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+        <div class="faq-content">
+            <?php foreach ($faqGroupCollection as $group) : 
+                 $group_name = $group->getGroupName();
+                    $arr = @explode(" ",$group_name);
+                ?>
+                <div class="accordian_hide" id="<?php /* @noEscape */ echo strtolower($arr[0]); ?>">
+                <?php if ($showGroupTitle) : ?>
+                    <div class="faq-topic-title">
+                        <i></i><h3><?php /* @noEscape */ echo $group->getGroupName(); ?></h3>
+                    </div>
+                <?php endif; ?>
+                <div class="faq-accordion accordion">
+                <?php $faqCollection = $block->getFaqCollection($group->getId()); ?>
+                    <?php if ($faqCollection->getSize()) : ?>
+                        <?php foreach ($faqCollection as $faq) : ?> 
+                            
+                            <h3 class="accordion-section-title"><?php /* @noEscape */ echo $faq->getTitle(); ?></h3>
+                            <div class="accordion-section-content">
+                                <?php /* @noEscape */ echo $block->filterOutputHtml($faq->getContent()); ?>
+                            </div>
+                        
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <div><?php /* @noEscape */ echo __('No FAQ available'); ?></div>
+                    <?php endif; ?>
+                </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <?php endif; ?>
+<?php else : ?>
+    <div>
+        <h1><?php /* @noEscape */ echo __('No FAQ Group available'); ?></h1>
+    </div>
+<?php endif; ?>
+</div>
+</section>

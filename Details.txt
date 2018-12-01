@@ -1,0 +1,43 @@
+A2Hosting
+
+~~~ Nameservers ~~~
+Nameserver 1 ns1.a2hosting.com
+Nameserver 2 ns2.a2hosting.com
+Nameserver 3 ns3.a2hosting.com
+Nameserver 4 ns4.a2hosting.com
+
+
+Cpanel- 
+
+https://my.a2hosting.com/clientarea.php
+
+Username : vibhor@nirvanacanada.com
+Password : Nirvana@#123
+
+
+
+FTP-
+
+
+FTP server: ftp.nirvana.a2hosted.com
+Username - magento2@nirvana.a2hosted.com
+Password - GF9li#m$-^8w
+
+
+Database-
+
+User: nirvanaa_magento
+Database: nirvanaa_gymmet
+Password - QVgv*)n7p@2g
+
+
+SSH
+
+Port - 7822
+Hostname - az1-ls4.a2hosting.com
+Username - nirvanaa
+Password - 7V18(3WzwFy#rN
+
+================================
+
+

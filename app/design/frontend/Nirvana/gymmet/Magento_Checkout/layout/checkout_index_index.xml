@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <remove src="js/custom.js" />
+    </head>
+    <body>
+        <referenceContainer name="page.main.title" remove="true" />
+        <referenceContainer name="main.content">
+            <container name="checkout-top" htmlTag="section" htmlClass="Chekout_top" before="-">
+                <container name="top-container" htmlTag="div" htmlClass="container">
+                    <block class="Magento\Cms\Block\Block" name="checkout-top-block">
+                        <arguments>
+                            <argument name="block_id" xsi:type="string">checkout-top</argument>
+                        </arguments>
+                    </block>
+                </container>
+            </container>
+        </referenceContainer>
+        <referenceContainer name="columns" htmlTag="section" htmlClass="content-sec margin-top">
+            <container name="chkout-container" htmlTag="div" htmlClass="main-container col2-right-layout"/>
+        </referenceContainer>
+        <referenceContainer name="main" htmlClass="container" />
+        <move element="main" destination="chkout-container" />
+
+    </body>
+</page>

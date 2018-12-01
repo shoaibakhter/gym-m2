@@ -1,0 +1,85 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Blog
+ * @copyright   Copyright (c) 2018 Mageplaza (http://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\Blog\Block\Frontend $block */
+?>
+
+<div id="mpblog-list-container" class="journel_box">
+    <?php $postCollection = $block->getPostCollection(); ?>
+    <?php if ($postCollection && $postCollection->getSize()) : ?>
+        <div class="post-list-body">
+            <?php $i = 1 ?>
+             <?php /** @var \Mageplaza\Blog\Model\Post $post */ foreach ($postCollection as $post) :?>
+                <div class="postWrapper reapt_row">
+                        <a class="post-link-title" title="<?php echo $block->escapeHtml($post->getName()); ?>" href="<?php echo $post->getUrl() ?>"></a>
+                        <div class="descp">
+                            <?php
+                                $cls= "";
+                                if($i%2==0){ $cls="light_gray"; }
+                                if($i%3==0){ $cls="pink_color"; }
+                                if($i%4==0){ $cls="vilot_color"; }
+                            ?>
+                            <div class="box <?php echo $cls; ?>">
+                                 
+                                    <a class="post-link-title" title="<?php echo $block->escapeHtml($post->getName()); ?>" href="<?php echo $post->getUrl() ?>">
+                                        <p><?php echo $block->getPostInfo($post); ?></p>
+                                        <h3><?php echo $post->getName();?></h3>
+                                    </a>
+
+                                    <p><a href="<?php echo $post->getUrl() ?>"></a><a href="<?php echo $post->getUrl() ?>" class="read_more">Read more</a></p>
+                               
+                            </div>
+                        </div>
+                        <div class="photo">
+                            <?php if ($post->getImage()) : ?>
+                            
+                                <a href="<?php echo $post->getUrl() ?>">
+                                    <p><img class="img-responsive"
+                                         src="<?php echo $block->resizeImage($post->getImage(), '940x'); ?>"
+                                         alt="<?php echo $block->escapeHtml($post->getName()); ?>"/>
+                                     </p>
+                                </a>
+                            
+                            <?php else: ?>
+                                <a href="<?php echo $post->getUrl() ?>">
+                                    
+                                       <?php echo $post->getShortDescription(); ?>
+                                    
+                                </a>
+                            <?php endif; ?>
+                            
+                        </div>
+
+                    
+                </div>
+                <?php if($i++ % 2 == 0): ?>
+                    
+                <?php endif; ?>
+            <?php endforeach; ?>
+            <div class="mp-clear"></div>
+        </div>
+        <?php echo $block->getPagerHtml() ?>
+    <?php else: ?>
+        <?php echo __('There are no posts at this moment'); ?>
+    <?php endif; ?>
+    <?php echo $this->getChildHtml('additional');?>
+</div>
+

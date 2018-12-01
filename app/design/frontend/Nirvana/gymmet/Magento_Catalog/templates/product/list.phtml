@@ -1,0 +1,165 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+use Magento\Framework\App\Action\Action;
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @var $block \Magento\Catalog\Block\Product\ListProduct
+ */
+?>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$_productCollection = $block->getLoadedProductCollection();
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+?>
+<?php if (!$_productCollection->count()): ?>
+    <div class="message info empty"><div><?= /* @escapeNotVerified */ __('We can\'t find products matching the selection.') ?></div></div>
+<?php else: ?>
+    <?php /* ?><?= $block->getToolbarHtml() ?>
+    <?= $block->getAdditionalHtml() ?><?php */ ?>
+    <?php
+    if ($block->getMode() == 'grid') {
+        $viewMode = 'grid';
+        $image = 'category_page_grid';
+        $showDescription = true;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    } else {
+        $viewMode = 'list';
+        $image = 'category_page_list';
+        $showDescription = true;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW;
+    }
+    /**
+     * Position for actions regarding image size changing in vde if needed
+     */
+    $pos = $block->getPositioned();
+    ?>
+    <div class="three_col  switch_ <?= /* @escapeNotVerified */ $viewMode ?> products-<?= /* @escapeNotVerified */ $viewMode ?>">
+        <?php $iterator = 0; $j=0; ?>
+        <ol class="products list items product-items">
+            <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
+            <?php foreach ($_productCollection as $_product): ?>
+                <?php 
+                   
+                     
+                    if($iterator%7==0){ echo '<div class="row" id="row_'.$iterator.'">'; $ijk=0; $j++; }
+                ?>
+                <?php $ijk++; 
+                    //echo $ijk."==========".$j;
+                    if($ijk==1){ echo '<div class="col-md-7">'; $image = "category_page_grid"; $imagewidth=270; $imageheight=390; }
+                    if($ijk==7){ echo '<div class="col-md-5">';  $image = 'category_page_grid-1';  $imagewidth=500; $imageheight=500;} 
+
+                    $imageHelper  = $objectManager->get('\Magento\Catalog\Helper\Image');
+                    $image_url = $imageHelper->init($_product, 'product_thumbnail_image')->setImageFile($_product->getFile())->resize($imagewidth, $imageheight)->getUrl();
+                ?>
+                <?php //$ijk++; 
+                    //echo "ijk=".$ijk."========== J=".$j."====== iterator=".$iterator;
+                    //if($ijk==1 && $j%2!=0){ echo '<div class="col-md-7">'; $image = 'category_page_grid-1';}
+                    //if($ijk==1 && $j%2==0){ echo '<div class="col-md-5">'; }
+                    //if($ijk==7 && $j%2!=0){ echo '<div class="col-md-5">';$image = 'category_page_grid-1'; }
+                    //if($ijk==7 && $j%2==0){ echo '<div class="col-md-7">';  }
+                ?>
+                <?= /* @escapeNotVerified */ ($iterator++ == 0) ? '<div class="product-box">' : '<div class="product-box">' ?>
+                    <div class="photo">
+                        <div class="resposive-photo">
+                           <div class="img-container"> 
+                    <?php
+                   
+                    //echo $iterator/7;
+                    $productImage = $block->getImage($_product, $image);
+                    if ($pos != null) {
+                        //$position = ' style="left:' . $productImage->getWidth() . 'px;'. 'top:' . $productImage->getHeight() . 'px;"';
+                    }
+                    ?>
+                    <?php // Product Image ?>
+                    <a href="<?= /* @escapeNotVerified */ $_product->getProductUrl() ?>" class="" tabindex="-1">
+                        <?= $productImage->toHtml() ?>
+                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="photo hover-photo">
+                        <div class="resposive-photo">
+                           <div class="img-container"> 
+                    <?php
+                    //echo $iterator/7;
+                    $productImage = $block->getImage($_product, $image);
+                    if ($pos != null) {
+                        //$position = ' style="left:' . $productImage->getWidth() . 'px;'                            . 'top:' . $productImage->getHeight() . 'px;"';
+                    }
+                    ?>
+                    <?php // Product Image ?>
+                    <a href="<?= /* @escapeNotVerified */ $_product->getProductUrl() ?>" class="" tabindex="-1">
+                        <img src="<?php echo $image_url; ?>">
+                        
+                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php 
+                        if($ijk==7){
+                    ?>
+                    <div class="show_descp">
+                        <h3><?= /* @escapeNotVerified */ $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h3>
+                        <p>
+                        <?php 
+                            $desc = $_helper->productAttribute($_product, $_product->getDescription(), 'description');
+                            /* @escapeNotVerified */ echo substr($desc, 0, 120) ?>...
+                        </p>
+                        <a class="shop_this" href="<?= /* @escapeNotVerified */ $_product->getProductUrl() ?>">Shop This</a>
+                    </div>
+                    <?php        
+                        }
+                    ?>
+                    <div class="product-info descp">
+                        <?= /* @escapeNotVerified */ $block->getProductPrice($_product) ?>
+                        </div>
+                    <div class="product-info descp">
+                        <h4>Alo Yoga</h4>
+                        <?php
+                            $_productNameStripped = $block->stripTags($_product->getName(), null, true);
+                        ?>
+                        <h3>
+                            <a class="product-item-link"
+                               href="<?= /* @escapeNotVerified */ $_product->getProductUrl() ?>">
+                                <?= /* @escapeNotVerified */ $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                            </a>
+                        </h3>
+                        <?php /* ?><?= $block->getReviewsSummaryHtml($_product, $templateType) ?><?php */ ?>
+                        <?= /* @escapeNotVerified */ $block->getProductPrice($_product) ?>
+                        <?= $block->getProductDetailsHtml($_product) ?>
+
+                        <div class="actions">
+                            <a title="View Details" class="button" href="<?= /* @escapeNotVerified */ $_product->getProductUrl() ?>">Shop This</a>
+                        </div>
+                    </div>
+                
+                <?php if($ijk==7 || $ijk==6){ echo '</div>'; }
+                    if($iterator%7==0){  echo '</div>'; } ?>
+                </div>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+    <?php /* ?><?= $block->getToolbarHtml() ?><?php */ ?>
+    <?php if (!$block->isRedirectToCartEnabled()) : ?>
+        <script type="text/x-magento-init">
+        {
+            "[data-role=tocart-form], .form.map.checkout": {
+                "catalogAddToCart": {
+                    "product_sku": "<?= /* @NoEscape */ $_product->getSku() ?>"
+                }
+            }
+        }
+        </script>
+    <?php endif; ?>
+<?php endif; ?>

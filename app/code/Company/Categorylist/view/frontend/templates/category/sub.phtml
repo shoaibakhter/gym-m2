@@ -1,0 +1,22 @@
+
+        <div class="designer-row">
+<?php $categories = $block->getCategoryList(); ?>
+
+        <?php foreach ($categories as $category): ?>
+            <div class="deisner-box">
+                
+                    <?php if ($category['thumbnail']): ?>
+                        <a class="shop_c designerhover" href="<?php echo $category->getUrl() ?>" title="<?php echo $category->getName() ?>"><img src="<?php echo $block->getCategoryThumbImage($category['thumbnail']); ?>" height="170" width="170" /></a>
+                    <?php else: ?>
+                        <a class="shop_c designerhover" href="<?php echo $category->getUrl() ?>" title="<?php echo $category->getName() ?>"><img src="<?php echo $block->getViewFileUrl($block->getPlaceholderImage()); ?>" height="170" width="170" /></a>
+                    <?php endif; ?>
+                    <h3><?php echo $category->getName() ?></h3>
+                    <p><?php echo $category->getDescription() ?></p>
+                            <a class="shop_c" href="<?php echo $category->getUrl() ?>" title="<?php echo $category->getName() ?>"> Shop The Collection</a>
+                        
+               
+            </div>
+        <?php endforeach; ?>
+
+
+        </div>

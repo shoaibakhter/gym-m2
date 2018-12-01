@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <head>
+        <script src="js/custom.js" />
+    </head>
+    <body>
+        
+        <referenceContainer name="main">
+            <container name="dash-main" htmlTag="section" htmlClass="content-sec margin-top">
+                <container name="dash-container" htmlTag="div" htmlClass="container">
+                    <block class="Magento\Cms\Block\Block" name="customer-dashboard">
+                        <arguments>
+                            <argument name="block_id" xsi:type="string">customer-dashboard</argument>
+                        </arguments>
+                    </block>
+                </container>
+            </container>
+        </referenceContainer>
+        <move element="customer_account_dashboard_info" destination="dash-container" />
+        <move element="customer_account_dashboard_address" destination="dash-container" />
+        <move element="page.messages" destination="dash-container" before="customer-dashboard" />
+        <referenceBlock name="customer_account_dashboard_info" remove="true"/>
+        <referenceBlock name="customer_account_dashboard_address" remove="true"/>
+        <referenceBlock name="customer_account_dashboard_top" remove="true"/>
+        <referenceBlock name="catalog.rightnav" remove="true"/>
+    </body>
+</page>

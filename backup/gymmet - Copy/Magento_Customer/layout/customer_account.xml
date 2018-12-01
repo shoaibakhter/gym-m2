@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Customer My Account (All Pages)" design_abstraction="custom">
+    <head>
+        <title>My Account</title>
+    </head>
+    <body>
+        <referenceContainer name="main.content" htmlTag="div" htmlClass="myaccount"/>
+        <attribute name="class" value="account"/>
+        <referenceContainer name="main">
+            <container name="dash-main" htmlTag="section" htmlClass="content-sec margin-top">
+                <container name="dash-container" htmlTag="div" htmlClass="container"/>
+            </container>
+        </referenceContainer>
+        <move element="content" destination="dash-container" />
+        <move element="page.main.title" destination="main.content" before="-" />
+        <move element="page.messages" destination="dash-container" before="-" />
+        <referenceContainer name="page.main.title" htmlTag="section" htmlClass="Inner-Banner myaccount_nav Margin-top" />
+    </body>
+</page>
